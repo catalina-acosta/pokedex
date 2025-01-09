@@ -1,0 +1,56 @@
+:root {
+    --dark-grey: #292F36;
+    --teal: #4ECDC4;
+    --white: #F7FFF7;
+    --light-rose: #FFC2C2;
+    --rose: #FF6B6B;
+    --yellow: #FFE66D;
+    }
+
+*  {
+    box-sizing: border-box;
+    margin: 0;
+    scroll-behavior: smooth;
+    font-family: "Inter", serif;
+}
+
+.vinil-ff {
+    font-family: "Rubik Vinyl", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.content-box {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+#content {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 24px 0;
+}
+
+#card {
+    width: 260px;
+    height: 400px;
+}
+
+.img-container {
+    height: 260px;
+    width: 260px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+img {
+    width: 260px;
+}
