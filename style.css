@@ -43,14 +43,50 @@ header {
 #card {
     width: 260px;
     height: 400px;
+    position: relative;
+    background: white; /* Card background color */
+    border-radius: 10px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensures elements don't overflow the card boundaries */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
 .img-container {
+    width: 260px;
     height: 260px;
-    width: 260px;
     border-radius: 50%;
-    border: 2px solid black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2; 
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* overflow: hidden;  */
 }
-img {
-    width: 260px;
+
+.img-container img {
+    width: 100%; 
+}
+
+.card-info {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: #f1f1f1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; 
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-info p {
+    margin: 5px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Text color */
+    text-align: center;
 }
