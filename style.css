@@ -40,9 +40,9 @@ header {
     padding: 24px 0;
 }
 
-#card {
-    width: 260px;
-    height: 400px;
+.card {
+    width: 200px;
+    height: 300px;
     position: relative;
     background: white; /* Card background color */
     border-radius: 10px; /* Rounded corners for the card */
@@ -51,8 +51,8 @@ header {
 }
 
 .img-container {
-    width: 260px;
-    height: 260px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -66,14 +66,14 @@ header {
 }
 
 .img-container img {
-    width: 100%; 
+    width: 90%; 
 }
 
 .card-info {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 200px;
+    height: 140px;
     background: #f1f1f1; 
     display: flex;
     flex-direction: column;
@@ -90,3 +90,37 @@ header {
     color: #333; /* Text color */
     text-align: center;
 }
+
+.green {
+    background-color: #90C8AC;
+
+}
+
+.red {
+    background-color: #E17F6F;
+}
+
+.blue {
+    background-color: #A6B6D7;
+}
+
+.white {
+    background-color: #E5E6E6;
+}
+
+.brown {
+    background-color: #967D65;
+}
+
+.yellow {
+    background-color: #EACB5C;
+}
+
+.purple {
+    background-color: #BA93BE;
+}
+
+.pink {
+    background-color: #F9D0D4
+}
+
