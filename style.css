@@ -124,3 +124,21 @@ header {
     background-color: #F9D0D4
 }
 
+.d-none {
+    display: none;
+}
+
+#overlay{
+    width: 100%;
+    background-color: #ffffffd4;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+}
+
+#cardSlider {
+    z-index: 21;
+}
