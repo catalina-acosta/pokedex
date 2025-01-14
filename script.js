@@ -38,7 +38,7 @@ async function fetchPokemonSpecies(id) {
 function pokemonCardTemplate(currentPokemon, pokemonColor) {
 
     return `
-    <div id="card${currentPokemon.id}" class="card " onclick="toggleOverlay('${currentPokemon.id}', '${pokemonColor}')">
+    <div id="card${currentPokemon.id}" class="card " onclick="openOverlay('${currentPokemon.id}', '${pokemonColor}')">
                 <div class="img-container">
                     <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
@@ -51,30 +51,49 @@ function pokemonCardTemplate(currentPokemon, pokemonColor) {
 }
 
 
-function toggleOverlay(pokemonId, pokemonColor){
+function openOverlay(pokemonId, pokemonColor){
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d-none");
-    overlayRef.innerHTML += cardSliderTemplate(pokemonId, pokemonColor);
+
+    createSlider(pokemonId, pokemonColor);
 }
 
-function cardSliderTemplate(pokemonId, pokemonColor) {
+function createSlider(pokemonId, pokemonColor) {
+    let overlayRef = document.getElementById("overlay");
+
     for (let index = 0; index < allPokemonWithAbilities.length; index++) {
         if (allPokemonWithAbilities[index].id == pokemonId){
-            return `
-            <div id="cardSlider${allPokemonWithAbilities[index].id}" class="card " onclick="toggleOverlay()">
+            overlayRef.innerHTML += cardSliderTemplate(allPokemonWithAbilities[index], pokemonColor);
+            renderPokemonSliderTypes(allPokemonWithAbilities[index]);
+        }
+    }
+}
+
+function cardSliderTemplate(zoomedPokeCard, pokemonColor) {
+    return `
+            <div id="cardSlider${zoomedPokeCard.id}" class="card " onclick="closeOverlay()">
                 <div class="img-container">
-                <img src="${allPokemonWithAbilities[index].sprites.other['official-artwork'].front_default}" alt="${allPokemonWithAbilities[index].name}">
+                <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
                 <div class="card-info ${pokemonColor}">
-                    <p>${allPokemonWithAbilities[index].name}</p>
-                    <div id="pokemonTypes${allPokemonWithAbilities.id}"></div>
+                    <p>${zoomedPokeCard.name}</p>
+                    <div id="pokemonSliderTypes${zoomedPokeCard.id}"></div>
                 </div>
             </div>
             `
-        }
-        
-    }
-    
+}
+
+function renderPokemonSliderTypes(currentPokemonSlider) {
+    let pokemonSliderTypesRef = document.getElementById(`pokemonSliderTypes${currentPokemonSlider.id}`);
+    let pokemonSliderTypes = currentPokemonSlider.types;
+    pokemonSliderTypes.length < 2 ? pokemonSliderTypesRef.innerHTML += `<p>${pokemonSliderTypes[0].type.name}</p>` : pokemonSliderTypesRef.innerHTML +=  `<p>${pokemonSliderTypes[0].type.name}</p> <p>${pokemonSliderTypes[1].type.name}</p>`;
+
+}
+
+function closeOverlay() {
+    let overlayRef = document.getElementById("overlay");
+    overlayRef.classList.add("d-none");
+    overlayRef.innerHTML = "";
 }
 // hover effect, cursor pointer, scale etc. on the cards
 
