@@ -9,6 +9,7 @@ async function renderPokemon() {
     let responseJson = await response.json();
     pokemonList = responseJson.results;
     let contentRef = document.getElementById("content");
+    contentRef.innerHTML = "";
     
     for (let index = 0; index < pokemonList.length; index++) {
         let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
@@ -19,7 +20,6 @@ async function renderPokemon() {
         
         currentPokemon.color = pokemonColor;
         allPokemonWithAbilities.push(currentPokemon);
-        console.log(currentPokemon);
         
         contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
 
@@ -89,6 +89,25 @@ function closeOverlay() {
     overlayRef.innerHTML = "";
 }
 
+function searchPokemon(){
+    let inputRef = document.getElementById("input").value;
+    console.log(inputRef);
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML = `<button class="see-all-btn" onclick="renderPokemon()">see all pokemon</button>`
+
+    if (inputRef.length > 2) {
+        allPokemonWithAbilities.forEach(pokemon => {
+            if (pokemon.name.includes(inputRef)) {
+                contentRef.innerHTML += pokemonCardTemplate(pokemon);
+            } else {
+                contentRef.innerHTML = `<button class="see-all-btn" onclick="renderPokemon()">see all pokemon</button>
+                                        <p>pokemon not found</p>`
+            }
+        })
+    } else {
+        contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
+    }
+}
 
 // hover effect, cursor pointer, scale etc. on the cards
 
