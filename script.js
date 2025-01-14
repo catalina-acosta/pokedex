@@ -1,5 +1,5 @@
 let pokemonList;
-let pokemonAbilities;
+let currentPokemon;
 let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
@@ -13,15 +13,15 @@ async function renderPokemon() {
     for (let index = 0; index < pokemonList.length; index++) {
         let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
         let responsePokeCharJson = await responsePokeChar.json();
-        pokemonAbilities = responsePokeCharJson;
-        allPokemonWithAbilities.push(pokemonAbilities);
+        currentPokemon = responsePokeCharJson;
+        allPokemonWithAbilities.push(currentPokemon);
         
-        await fetchPokemonSpecies(pokemonAbilities.id);
+        await fetchPokemonSpecies(currentPokemon.id);
         
-        contentRef.innerHTML += pokemonCardTemplate(pokemonAbilities, pokemonColor);
+        contentRef.innerHTML += pokemonCardTemplate(currentPokemon, pokemonColor);
 
-        let pokemonTypesRef = document.getElementById(`pokemonTypes${pokemonAbilities.id}`);
-        pokemonTypes = pokemonAbilities.types;
+        let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
+        pokemonTypes = currentPokemon.types;
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
     }
 }
@@ -35,39 +35,46 @@ async function fetchPokemonSpecies(id) {
 }
 
 
-function pokemonCardTemplate(pokemonAbilities, pokemonColor) {
+function pokemonCardTemplate(currentPokemon, pokemonColor) {
 
     return `
-    <div id="card${pokemonAbilities.id}" class="card " onclick="toggleOverlay(${pokemonAbilities.id})">
+    <div id="card${currentPokemon.id}" class="card " onclick="toggleOverlay('${currentPokemon.id}', '${pokemonColor}')">
                 <div class="img-container">
-                    <img src="${pokemonAbilities.sprites.other['official-artwork'].front_default}" alt="${pokemonAbilities.name}">
+                    <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
                 <div class="card-info ${pokemonColor}">
-                    <p>${pokemonAbilities.name}</p>
-                    <div id="pokemonTypes${pokemonAbilities.id}"></div>
+                    <p>${currentPokemon.name}</p>
+                    <div id="pokemonTypes${currentPokemon.id}"></div>
                 </div>
             </div>
     `
 }
 
 
-function toggleOverlay(pokemonAbilities){
+function toggleOverlay(pokemonId, pokemonColor){
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d-none");
-    overlayRef.innerHTML += cardSliderTemplate(pokemonAbilities);
+    overlayRef.innerHTML += cardSliderTemplate(pokemonId, pokemonColor);
 }
 
-function cardSliderTemplate(pokemonAbilities) {
-    return `
-    <div id="cardSlider${pokemonAbilities.id}" class="card " onclick="toggleOverlay(${pokemonAbilities.id})">
+function cardSliderTemplate(pokemonId, pokemonColor) {
+    for (let index = 0; index < allPokemonWithAbilities.length; index++) {
+        if (allPokemonWithAbilities[index].id == pokemonId){
+            return `
+            <div id="cardSlider${allPokemonWithAbilities[index].id}" class="card " onclick="toggleOverlay()">
                 <div class="img-container">
+                <img src="${allPokemonWithAbilities[index].sprites.other['official-artwork'].front_default}" alt="${allPokemonWithAbilities[index].name}">
                 </div>
                 <div class="card-info ${pokemonColor}">
-                    <p>${pokemonAbilities.name}</p>
-                    <div id="pokemonTypes${pokemonAbilities.id}"></div>
+                    <p>${allPokemonWithAbilities[index].name}</p>
+                    <div id="pokemonTypes${allPokemonWithAbilities.id}"></div>
                 </div>
             </div>
-    `
+            `
+        }
+        
+    }
+    
 }
 // hover effect, cursor pointer, scale etc. on the cards
 
