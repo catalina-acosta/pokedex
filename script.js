@@ -14,11 +14,14 @@ async function renderPokemon() {
         let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
         let responsePokeCharJson = await responsePokeChar.json();
         currentPokemon = responsePokeCharJson;
-        allPokemonWithAbilities.push(currentPokemon);
         
         await fetchPokemonSpecies(currentPokemon.id);
         
-        contentRef.innerHTML += pokemonCardTemplate(currentPokemon, pokemonColor);
+        currentPokemon.color = pokemonColor;
+        allPokemonWithAbilities.push(currentPokemon);
+        console.log(currentPokemon);
+        
+        contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
 
         let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
         pokemonTypes = currentPokemon.types;
@@ -35,14 +38,14 @@ async function fetchPokemonSpecies(id) {
 }
 
 
-function pokemonCardTemplate(currentPokemon, pokemonColor) {
+function pokemonCardTemplate(currentPokemon) {
 
     return `
-    <div id="card${currentPokemon.id}" class="card " onclick="openOverlay('${currentPokemon.id}', '${pokemonColor}')">
+    <div id="card${currentPokemon.id}" class="card " onclick="openOverlay('${currentPokemon.id}', '${currentPokemon.color}')">
                 <div class="img-container">
                     <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
-                <div class="card-info ${pokemonColor}">
+                <div class="card-info ${currentPokemon.color}">
                     <p>${currentPokemon.name}</p>
                     <div id="pokemonTypes${currentPokemon.id}"></div>
                 </div>
@@ -51,36 +54,62 @@ function pokemonCardTemplate(currentPokemon, pokemonColor) {
 }
 
 
-function openOverlay(pokemonId, pokemonColor){
+function openOverlay(pokemonId){
     let overlayRef = document.getElementById("overlay");
     overlayRef.classList.remove("d-none");
 
-    createSlider(pokemonId, pokemonColor);
+    createSlider(pokemonId);
 }
 
-function createSlider(pokemonId, pokemonColor) {
+function createSlider(pokemonId) {
     let overlayRef = document.getElementById("overlay");
+    overlayRef.innerHTML = "";
 
     for (let index = 0; index < allPokemonWithAbilities.length; index++) {
         if (allPokemonWithAbilities[index].id == pokemonId){
-            overlayRef.innerHTML += cardSliderTemplate(allPokemonWithAbilities[index], pokemonColor);
+            overlayRef.innerHTML += cardSliderTemplate(allPokemonWithAbilities[index]);
             renderPokemonSliderTypes(allPokemonWithAbilities[index]);
         }
     }
 }
 
-function cardSliderTemplate(zoomedPokeCard, pokemonColor) {
+function cardSliderTemplate(zoomedPokeCard) {
     return `
             <div id="cardSlider${zoomedPokeCard.id}" class="card " onclick="closeOverlay()">
                 <div class="img-container">
                 <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
-                <div class="card-info ${pokemonColor}">
+                <div class="card-info ${zoomedPokeCard.color}">
                     <p>${zoomedPokeCard.name}</p>
                     <div id="pokemonSliderTypes${zoomedPokeCard.id}"></div>
                 </div>
-            </div>
+                </div>
+                <div class="slider_navigation">
+                    <a class="prev" onclick="previousSlide(${zoomedPokeCard.id})">&#10094;</a> 
+                    <p>${zoomedPokeCard.id} / ${allPokemonWithAbilities.length}</p>
+                    <a class="next" onclick="nextSlide(${zoomedPokeCard.id})">&#10095;</a>
+                </div>
             `
+}
+
+function previousSlide(pokemonId) { // use only id as parameter. index = id - 1 
+    if (pokemonId <= 0) {
+        pokemonId = allPokemonWithAbilities.length - 1;
+    } else if (pokemonId > allPokemonWithAbilities.length) {
+        pokemonId === 0;
+    } else {
+        pokemonId = pokemonId -1;
+    }
+    openOverlay(pokemonId);
+}
+
+function nextSlide(pokemonId) {
+    if (pokemonId >= allPokemonWithAbilities.length - 1) {
+        pokemonId = 0;
+    } else {
+        pokemonId = pokemonId + 1;
+    }
+    openOverlay(pokemonId);
 }
 
 function renderPokemonSliderTypes(currentPokemonSlider) {
