@@ -93,8 +93,8 @@ function cardSliderTemplate(zoomedPokeCard) {
 }
 
 function previousSlide(pokemonId) { // use only id as parameter. index = id - 1 
-    if (pokemonId <= 0) {
-        pokemonId = allPokemonWithAbilities.length - 1;
+    if (pokemonId <= 1) {
+        pokemonId = allPokemonWithAbilities.length;
     } else if (pokemonId > allPokemonWithAbilities.length) {
         pokemonId === 0;
     } else {
@@ -104,8 +104,8 @@ function previousSlide(pokemonId) { // use only id as parameter. index = id - 1
 }
 
 function nextSlide(pokemonId) {
-    if (pokemonId >= allPokemonWithAbilities.length - 1) {
-        pokemonId = 0;
+    if (pokemonId >= allPokemonWithAbilities.length) {
+        pokemonId = 1;
     } else {
         pokemonId = pokemonId + 1;
     }
