@@ -17,13 +17,18 @@ function pokemonCardTemplate(currentPokemon) {
 
 function cardSliderTemplate(zoomedPokeCard) {
     return `
-            <div id="cardSlider${zoomedPokeCard.id}" class="card " onclick="closeOverlay()">
+            <div id="cardSlider${zoomedPokeCard.id}" class="card-slider" onclick="closeOverlay()">
                 <div class="img-container">
                 <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
                 <div class="card-info ${zoomedPokeCard.color}">
                     <p>${zoomedPokeCard.name}</p>
-                    <p></p>
+                    <p>${zoomedPokeCard.stats[0].stat.name}: ${zoomedPokeCard.stats[0].base_stat}</p>
+                    <p>${zoomedPokeCard.stats[1].stat.name}: ${zoomedPokeCard.stats[1].base_stat}</p>
+                    <p>${zoomedPokeCard.stats[2].stat.name}: ${zoomedPokeCard.stats[2].base_stat}</p>
+                    <p>${zoomedPokeCard.stats[3].stat.name}: ${zoomedPokeCard.stats[3].base_stat}</p>
+                    <p>${zoomedPokeCard.stats[4].stat.name}: ${zoomedPokeCard.stats[4].base_stat}</p>
+                    <p>${zoomedPokeCard.stats[5].stat.name}: ${zoomedPokeCard.stats[5].base_stat}</p>
                     <div id="pokemonSliderTypes${zoomedPokeCard.id}"></div>
                 </div>
                 </div>

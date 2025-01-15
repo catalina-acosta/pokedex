@@ -47,7 +47,7 @@ async function render40Pokemon() {
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
     }
 
-    loadMoreBtnRef.innerHTML += `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
+    loadMoreBtnRef.innerHTML = `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
 async function fetchPokemonSpecies(id) {
@@ -120,6 +120,9 @@ function searchPokemon(){
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
+    let loadMoreBtnRef = document.getElementById("loadMoreBtnContainer");
+    loadMoreBtnRef.innerHTML = "";
+
     if (inputRef.length > 2) {
         allPokemonWithAbilities.forEach(pokemon => {
             if (pokemon.name.includes(inputRef)) {
@@ -129,7 +132,7 @@ function searchPokemon(){
     } else {
         contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
     }
-    contentRef.innerHTML += `<button class="see-all-btn" onclick="resetpokemonAmountToBeRendered(), render40Pokemon() ">see all pokemon</button>`
+    loadMoreBtnRef.innerHTML += `<button class="see-all-btn" onclick="resetpokemonAmountToBeRendered(), render40Pokemon() ">see all pokemon</button>`
 }
 
 // loading circle

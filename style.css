@@ -29,7 +29,8 @@ header {
     height: 80px;
     display: flex;
     justify-content: space-between;
-    align-items: center;    
+    align-items: center; 
+    margin: 0 12px;   
 }
 
 #content {
@@ -175,7 +176,6 @@ button {
     background-color: #ffffffd4;
     position: fixed;
     top: 0;
-    left: 0;
     right: 0;
     bottom: 0;
     z-index: 20;
@@ -183,4 +183,30 @@ button {
 
 #cardSlider {
     z-index: 21;
+}
+
+.card-slider {
+    width: 300px;
+    height: 500px;
+    position: relative;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 140px auto 0;
+}
+
+.slider_navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.card-slider .img-container {
+    width: 300px;
+    height: 300px;
+}
+
+.card-slider .card-info {
+    height: 300px;
+    padding-top: 100px;
 }
