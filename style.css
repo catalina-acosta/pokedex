@@ -51,6 +51,11 @@ header {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
+.card:hover {
+    cursor: pointer;
+    scale: 1.08;
+}
+
 .img-container {
     width: 160px;
     height: 160px;
