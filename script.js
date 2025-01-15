@@ -3,7 +3,7 @@ let currentPokemon;
 let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
-let pokemonAmountToBeRendered = 40;
+let pokemonAmountToBeRendered = 0;
 
 async function renderPokemon() {
     let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
@@ -27,11 +27,11 @@ async function renderPokemon() {
             console.error(`Failed to fetch data for Pokémon ID ${index + 1}:`);
         }
     }
-
-    await render40Pokemon();
+    pokemonAmountToBeRendered += 40;
+    await render40Pokemon(pokemonAmountToBeRendered);
 }
 
-async function render40Pokemon() {
+async function render40Pokemon(pokemonAmountToBeRendered) {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
@@ -43,6 +43,8 @@ async function render40Pokemon() {
         pokemonTypes = currentPokemon.types;
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
     }
+
+    contentRef.innerHTML += `<button onclick="render40Pokemon(pokemonAmountToBeRendered + 40)">load next 40 pokemon</button>`
 }
 
 async function fetchPokemonSpecies(id) {
@@ -120,7 +122,7 @@ function searchPokemon(){
     } else {
         contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
     }
-    contentRef.innerHTML += `<button class="see-all-btn" onclick="render40Pokemon()">see all pokemon</button>`
+    contentRef.innerHTML += `<button class="see-all-btn" onclick="render40Pokemon(pokemonAmountToBeRendered)">see all pokemon</button>`
 }
 
 // hover effect, cursor pointer, scale etc. on the cards
