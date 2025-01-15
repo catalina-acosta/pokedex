@@ -6,6 +6,7 @@ function pokemonCardTemplate(currentPokemon) {
                 </div>
                 <div class="card-info ${currentPokemon.color}">
                     <p>${currentPokemon.name}</p>
+                    <p>${currentPokemon.id}</p>
                     <div id="pokemonTypes${currentPokemon.id}"></div>
                 </div>
             </div>
@@ -20,6 +21,7 @@ function cardSliderTemplate(zoomedPokeCard) {
                 </div>
                 <div class="card-info ${zoomedPokeCard.color}">
                     <p>${zoomedPokeCard.name}</p>
+                    <p></p>
                     <div id="pokemonSliderTypes${zoomedPokeCard.id}"></div>
                 </div>
                 </div>

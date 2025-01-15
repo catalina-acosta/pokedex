@@ -3,26 +3,42 @@ let currentPokemon;
 let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
+let pokemonAmountToBeRendered = 40;
 
 async function renderPokemon() {
-    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=40&offset=0');
+    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
     let responseJson = await response.json();
     pokemonList = responseJson.results;
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
     
-    for (let index = 0; index < pokemonList.length; index++) {
-        let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
-        let responsePokeCharJson = await responsePokeChar.json();
-        currentPokemon = responsePokeCharJson;
+    for (let index = 0; index < 1025; index++) {
+        try {
+            let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
+            let responsePokeCharJson = await responsePokeChar.json();
+            currentPokemon = responsePokeCharJson;
+            
+            await fetchPokemonSpecies(currentPokemon.id);
         
-        await fetchPokemonSpecies(currentPokemon.id);
-        
-        currentPokemon.color = pokemonColor;
-        allPokemonWithAbilities.push(currentPokemon);
-        
-        contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
+            currentPokemon.color = pokemonColor;
 
+            allPokemonWithAbilities.push(currentPokemon);}
+        catch {
+            console.error(`Failed to fetch data for Pokémon ID ${index + 1}:`);
+        }
+    }
+
+    await render40Pokemon();
+}
+
+async function render40Pokemon() {
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML = "";
+
+    for (let index = 0; index < pokemonAmountToBeRendered; index++) {
+        let currentPokemon = allPokemonWithAbilities[index];
+        contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
+                
         let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
         pokemonTypes = currentPokemon.types;
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
@@ -93,26 +109,24 @@ function searchPokemon(){
     let inputRef = document.getElementById("input").value;
     console.log(inputRef);
     let contentRef = document.getElementById("content");
-    contentRef.innerHTML = `<button class="see-all-btn" onclick="renderPokemon()">see all pokemon</button>`
+    contentRef.innerHTML = "";
 
     if (inputRef.length > 2) {
         allPokemonWithAbilities.forEach(pokemon => {
             if (pokemon.name.includes(inputRef)) {
                 contentRef.innerHTML += pokemonCardTemplate(pokemon);
-            } else {
-                contentRef.innerHTML = `<button class="see-all-btn" onclick="renderPokemon()">see all pokemon</button>
-                                        <p>pokemon not found</p>`
             }
         })
     } else {
         contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
     }
+    contentRef.innerHTML += `<button class="see-all-btn" onclick="render40Pokemon()">see all pokemon</button>`
 }
 
 // hover effect, cursor pointer, scale etc. on the cards
 
-// make dialog for each card that show more details of each pokemon
-// transparent background, arrows to switch to the next card or previous card
+
+// style slider
 // different statts and details showing 
 
 // implement search function that filters a pokemon by name or species? 
