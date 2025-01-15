@@ -36,6 +36,8 @@ async function render40Pokemon() {
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
+    let loadMoreBtnRef = document.getElementById("loadMoreBtnContainer");
+
     for (let index = 0; index < pokemonAmountToBeRendered; index++) {
         let currentPokemon = allPokemonWithAbilities[index];
         contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
@@ -45,7 +47,7 @@ async function render40Pokemon() {
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
     }
 
-    contentRef.innerHTML += `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
+    loadMoreBtnRef.innerHTML += `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
 async function fetchPokemonSpecies(id) {
