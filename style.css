@@ -41,8 +41,8 @@ header {
 }
 
 .card {
-    width: 200px;
-    height: 300px;
+    width: 160px;
+    height: 240px;
     position: relative;
     background: white; /* Card background color */
     border-radius: 10px; /* Rounded corners for the card */
@@ -51,11 +51,11 @@ header {
 }
 
 .img-container {
-    width: 200px;
-    height: 200px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     position: absolute;
-    top: 0;
+    top: -12px;
     left: 0;
     z-index: 2; 
     background: white;
@@ -77,18 +77,39 @@ header {
     background: #f1f1f1; 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     z-index: 1; 
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    padding: 4px 8px;
+}
+
+.name-id-box {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 48px;
+}
+
+.pokemon-types-box {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 14px;
+}
+
+.pokemon-types-box p {
+    padding: 5px;
+    background-color: white;
+    border-radius: 4px;
 }
 
 .card-info p {
     margin: 5px 0;
     font-size: 16px;
-    font-weight: bold;
     color: #333; /* Text color */
     text-align: center;
+}
+
+.pokemon-name {
+    font-weight: bold;
+    font-size: 18px;
 }
 
 .green {

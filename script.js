@@ -6,7 +6,7 @@ let pokemonColor;
 let pokemonAmountToBeRendered = 0;
 
 async function renderPokemon() {
-    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
+    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
     let responseJson = await response.json();
     pokemonList = responseJson.results;
     let contentRef = document.getElementById("content");
@@ -27,11 +27,12 @@ async function renderPokemon() {
             console.error(`Failed to fetch data for Pokémon ID ${index + 1}:`);
         }
     }
-    pokemonAmountToBeRendered += 40;
-    await render40Pokemon(pokemonAmountToBeRendered);
+    await render40Pokemon();
 }
 
-async function render40Pokemon(pokemonAmountToBeRendered) {
+async function render40Pokemon() {
+    pokemonAmountToBeRendered += 40;
+
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
 
@@ -44,7 +45,7 @@ async function render40Pokemon(pokemonAmountToBeRendered) {
         pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
     }
 
-    contentRef.innerHTML += `<button onclick="render40Pokemon(pokemonAmountToBeRendered + 40)">load next 40 pokemon</button>`
+    contentRef.innerHTML += `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
 async function fetchPokemonSpecies(id) {
@@ -53,6 +54,10 @@ async function fetchPokemonSpecies(id) {
 
     pokemonColor = responsePokeSpeciesJson.color.name;
     return pokemonColor;
+}
+
+function resetpokemonAmountToBeRendered(){
+    pokemonAmountToBeRendered = 0;
 }
 
 function openOverlay(pokemonId){
@@ -122,18 +127,16 @@ function searchPokemon(){
     } else {
         contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
     }
-    contentRef.innerHTML += `<button class="see-all-btn" onclick="render40Pokemon(pokemonAmountToBeRendered)">see all pokemon</button>`
+    contentRef.innerHTML += `<button class="see-all-btn" onclick="resetpokemonAmountToBeRendered(), render40Pokemon() ">see all pokemon</button>`
 }
 
+// loading circle
 // hover effect, cursor pointer, scale etc. on the cards
 
 
 // style slider
 // different statts and details showing 
-
-// implement search function that filters a pokemon by name or species? 
-// Suchleiste (man soll mindestens 3 Buchstaben eingeben bevor gesucht werden kann, wenn diese Buchstaben Teil des Namens eines Pokemons sind, 
-// sollten diese Pokemon angezeigt werden. Es sollte eine begrenzte Anzahl an Pokemon mit den Suchkriterien angezeigt werden, z.B. 10 stück)
+// chart.js doughnut chart
 
 // improve navbar and do final styling
 

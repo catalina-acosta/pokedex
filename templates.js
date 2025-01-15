@@ -5,9 +5,11 @@ function pokemonCardTemplate(currentPokemon) {
                     <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
                 <div class="card-info ${currentPokemon.color}">
-                    <p>${currentPokemon.name}</p>
-                    <p>${currentPokemon.id}</p>
-                    <div id="pokemonTypes${currentPokemon.id}"></div>
+                    <div class="name-id-box">
+                        <p class="pokemon-name">${currentPokemon.name}</p>
+                        <p class="pokemon-id">#${currentPokemon.id}</p>
+                    </div>
+                    <div class="pokemon-types-box" id="pokemonTypes${currentPokemon.id}"></div>
                 </div>
             </div>
     `
