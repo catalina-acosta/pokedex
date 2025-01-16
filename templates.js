@@ -33,7 +33,7 @@ function cardSliderTemplate(zoomedPokeCard) {
                     <div class="stat-container">
                         <p>${stat.stat.name}: </p>
                         <div class="progress-bar-container">
-                            <div class="progress-bar" style="width: ${stat.base_stat}%;"></div>
+                            <div class="progress-bar ${stat.stat.name}" style="width: ${stat.base_stat}%;"></div>
                         </div>
                     </div>
                 `).join('')}

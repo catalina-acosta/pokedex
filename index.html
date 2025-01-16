@@ -6,14 +6,17 @@
     <title>Pokedex</title>
     <script src="./script.js"></script>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./pokemonSlider.css">
     <script src="https://kit.fontawesome.com/c76ec36ccc.js" crossorigin="anonymous"></script>
     <script src="./templates.js"></script>
+    <script src="./pokemonSlider.js"></script>
+    <script src="./searchBar.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Rubik+Vinyl&display=swap" rel="stylesheet">
 </head>
 <body onload="renderPokemon()">
-    <div id="overlay" class="d-none"></div>
+    <div id="overlay" class="d-none" onclick="closeOverlay()"></div>
     <div class="content-box">
         <header>
             <h1 class="vinil-ff">pokédex</h1>
