@@ -41,9 +41,9 @@ function cardSliderTemplate(zoomedPokeCard) {
             </div>
         </div>
         <div class="slider_navigation">
-            <a class="prev" onclick="previousSlide(${zoomedPokeCard.id})">&#10094;</a> 
-            <p>${zoomedPokeCard.id} / ${allPokemonWithAbilities.length}</p>
-            <a class="next" onclick="nextSlide(${zoomedPokeCard.id})">&#10095;</a>
+            <a class="prev" onclick="previousSlide(${zoomedPokeCard.id})"><i class="fa-solid fa-angles-left"></i></a> 
+            <p><strong>${zoomedPokeCard.id}</strong> / ${allPokemonWithAbilities.length}</p>
+            <a class="next" onclick="nextSlide(${zoomedPokeCard.id})"><i class="fa-solid fa-angles-right"></i></a>
         </div>
     `;
 }

@@ -217,6 +217,13 @@ button {
 .slider_navigation {
     display: flex;
     justify-content: center;
+    margin-top: 24px;
+    align-items: center;
+    gap: 44px;
+}
+
+.slider-navigation p {
+    font-size: 18px;
 }
 
 .title-container {
@@ -282,5 +289,12 @@ button {
     border: 1px solid white;
     border-radius: 4px;
     padding: 4px;
+}
+
+i {
+    font-size: 32px;
+}
+a:hover {
+    cursor: pointer;
 }
 
