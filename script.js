@@ -6,11 +6,10 @@ let pokemonColor;
 let pokemonAmountToBeRendered = 0;
 
 async function renderPokemon() {
+    loading();
     let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
     let responseJson = await response.json();
     pokemonList = responseJson.results;
-    let contentRef = document.getElementById("content");
-    contentRef.innerHTML = "";
     
     for (let index = 0; index < 1025; index++) {
         try {
@@ -57,6 +56,40 @@ async function fetchPokemonSpecies(id) {
     pokemonColor = responsePokeSpeciesJson.color.name;
     return pokemonColor;
 }
+
+function loading() {
+    const pokemonIcons = [
+        "assets/bulbasaur_icon-icons.com_67580.png",
+        "assets/charmander_icon-icons.com_67576.png",
+        "assets/eevee_icon-icons.com_67563.png",
+        "assets/jigglypuff_icon-icons.com_67550.png",
+        "assets/meowth_icon-icons.com_67543.png",
+        "assets/pikachu_icon-icons.com_67535.png",
+        "assets/snorlax_icon-icons.com_67505.png",
+        "assets/squirtle_icon-icons.com_67504.png"
+    ];
+    
+    let currentIndex = 0; 
+    let contentRef = document.getElementById("content");
+    
+    contentRef.innerHTML += `
+        <div class="loading-content">
+            <img id="loading-image" src="" alt="loading icon">
+            <p>...loading...</p>
+        </div>
+    `;
+    
+    let imgRef = document.getElementById("loading-image");
+    
+    function updateImage() {
+        imgRef.src = pokemonIcons[currentIndex];
+        currentIndex = (currentIndex + 1) % pokemonIcons.length;
+    }
+    
+    updateImage(); 
+    const intervalId = setInterval(updateImage, 400);
+}
+
 
 function resetpokemonAmountToBeRendered(){
     pokemonAmountToBeRendered = 0;
@@ -136,13 +169,8 @@ function searchPokemon(){
 }
 
 // loading circle
-// hover effect, cursor pointer, scale etc. on the cards
-
-
 // style slider
-// different statts and details showing 
 // chart.js doughnut chart
 
 // improve navbar and do final styling
-
-// button to load next 40 pokemon
+// add to filezilla

@@ -33,6 +33,19 @@ header {
     margin: 0 12px;   
 }
 
+.loading-content {
+    margin-top: 240px;
+}
+
+.loading-content img {
+    width: 100px;
+}
+
+.loading-content p{
+    text-align: center;
+    font-weight: bold;
+}
+
 #content {
     display: flex;
     gap: 24px;
@@ -192,7 +205,7 @@ button {
 
 .card-slider {
     width: 300px;
-    height: 500px;
+    height: 600px;
     position: relative;
     background: white;
     border-radius: 10px;
@@ -206,12 +219,68 @@ button {
     justify-content: center;
 }
 
+.title-container {
+    position: relative;
+    z-index: 24;    
+    display: flex;
+    justify-content:space-between;
+    padding: 6px 8px;
+    margin-bottom: 4px;
+}
+
 .card-slider .img-container {
-    width: 300px;
-    height: 300px;
+    width: 240px;
+    height: 240px;
+    position: relative;
+    margin: 0 auto;
 }
 
 .card-slider .card-info {
-    height: 300px;
-    padding-top: 100px;
+    height: 400px;
+    padding: 0;
 }
+
+.card-info h4 {
+    margin-top: 80px;
+    padding: 0 6px;
+}
+
+.stat-container {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+.progress-bar-container {
+    width: 50%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: #4caf50; /* You can customize the color */
+    transition: width 0.3s ease;
+}
+
+.card-slider-types {
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 12px;
+}
+
+.card-slider-types p {
+    color: white;
+    font-weight: bold;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 4px;
+}
+

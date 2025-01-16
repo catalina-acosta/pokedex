@@ -17,26 +17,35 @@ function pokemonCardTemplate(currentPokemon) {
 
 function cardSliderTemplate(zoomedPokeCard) {
     return `
-            <div id="cardSlider${zoomedPokeCard.id}" class="card-slider" onclick="closeOverlay()">
-                <div class="img-container">
-                <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
+        <div id="cardSlider${zoomedPokeCard.id}" class="card-slider" onclick="closeOverlay()">
+            <div class="top-card-container">
+                <div class="title-container">
+                    <h2>${zoomedPokeCard.name}</h2>
+                    <p>#${zoomedPokeCard.id}</p>
                 </div>
-                <div class="card-info ${zoomedPokeCard.color}">
-                    <p>${zoomedPokeCard.name}</p>
-                    <p>${zoomedPokeCard.stats[0].stat.name}: ${zoomedPokeCard.stats[0].base_stat}</p>
-                    <p>${zoomedPokeCard.stats[1].stat.name}: ${zoomedPokeCard.stats[1].base_stat}</p>
-                    <p>${zoomedPokeCard.stats[2].stat.name}: ${zoomedPokeCard.stats[2].base_stat}</p>
-                    <p>${zoomedPokeCard.stats[3].stat.name}: ${zoomedPokeCard.stats[3].base_stat}</p>
-                    <p>${zoomedPokeCard.stats[4].stat.name}: ${zoomedPokeCard.stats[4].base_stat}</p>
-                    <p>${zoomedPokeCard.stats[5].stat.name}: ${zoomedPokeCard.stats[5].base_stat}</p>
-                    <div id="pokemonSliderTypes${zoomedPokeCard.id}"></div>
+                <div class="img-container ${zoomedPokeCard.color}">
+                    <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
-                </div>
-                <div class="slider_navigation">
-                    <a class="prev" onclick="previousSlide(${zoomedPokeCard.id})">&#10094;</a> 
-                    <p>${zoomedPokeCard.id} / ${allPokemonWithAbilities.length}</p>
-                    <a class="next" onclick="nextSlide(${zoomedPokeCard.id})">&#10095;</a>
-                </div>
-            `
+            </div>
+            <div class="card-info ">
+                <h4>Stats:</h4>
+                ${zoomedPokeCard.stats.map(stat => `
+                    <div class="stat-container">
+                        <p>${stat.stat.name}: </p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: ${stat.base_stat}%;"></div>
+                        </div>
+                    </div>
+                `).join('')}
+                <div id="pokemonSliderTypes${zoomedPokeCard.id}" class="card-slider-types ${zoomedPokeCard.color}"></div>
+            </div>
+        </div>
+        <div class="slider_navigation">
+            <a class="prev" onclick="previousSlide(${zoomedPokeCard.id})">&#10094;</a> 
+            <p>${zoomedPokeCard.id} / ${allPokemonWithAbilities.length}</p>
+            <a class="next" onclick="nextSlide(${zoomedPokeCard.id})">&#10095;</a>
+        </div>
+    `;
 }
+
 
