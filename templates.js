@@ -4,7 +4,7 @@ function pokemonCardTemplate(currentPokemon) {
                 <div class="img-container">
                     <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
-                <div class="card-info ${currentPokemon.color}">
+                <div class="card-info ${currentPokemon.types[0].type.name}">
                     <div class="name-id-box">
                         <p class="pokemon-name">${currentPokemon.name}</p>
                         <p class="pokemon-id">#${currentPokemon.id}</p>
@@ -23,7 +23,7 @@ function cardSliderTemplate(zoomedPokeCard) {
                     <h2>${zoomedPokeCard.name}</h2>
                     <p>#${zoomedPokeCard.id}</p>
                 </div>
-                <div class="img-container ${zoomedPokeCard.color}">
+                <div class="img-container ${zoomedPokeCard.types[0].type.name}">
                     <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
             </div>
@@ -48,4 +48,11 @@ function cardSliderTemplate(zoomedPokeCard) {
     `;
 }
 
-
+function loadingTemplate() {
+    return `
+        <div class="loading-content">
+            <img id="loading-image" src="" alt="loading icon">
+            <p>...loading...</p>
+        </div>
+    `
+}

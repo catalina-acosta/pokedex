@@ -17,38 +17,78 @@
     margin: 0 auto;
 }
 
-.green, .attack {
+.green, .attack, .grass {
     background-color: #90C8AC;
-
 }
 
-.red, .defense {
+.red, .defense, .fire {
     background-color: #E17F6F;
 }
 
-.blue, .hp{
+.blue, .hp, .water {
     background-color: #A6B6D7;
 }
 
-.white {
+.white, .normal {
     background-color: #E5E6E6;
 }
 
-.brown {
+.brown, .fighting {
     background-color: #967D65;
 }
 
-.yellow, .special-defense {
+.yellow, .special-defense, .electric {
     background-color: #EACB5C;
 }
 
-.purple, .special-attack {
+.purple, .special-attack, .poison {
     background-color: #BA93BE;
 }
 
-.pink, .speed {
-    background-color: #F9D0D4
+.pink, .speed, .psychic {
+    background-color: #F9D0D4;
 }
+
+.light-blue, .ice {
+    background-color: #B4E4EE;
+}
+
+.dark-brown, .ground {
+    background-color: #C2A488;
+}
+
+.sky-blue, .flying {
+    background-color: #B2D2E8;
+}
+
+.lime, .bug {
+    background-color: #A4C764;
+}
+
+.dark-gray, .rock {
+    background-color: #B1A292;
+}
+
+.dark-purple, .ghost {
+    background-color: #735D9A;
+}
+
+.deep-blue, .dragon {
+    background-color: #6C79DB;
+}
+
+.charcoal, .dark {
+    background-color: #5A5A5A;
+}
+
+.metal-gray, .steel {
+    background-color: #B8B8D0;
+}
+
+.soft-pink, .fairy {
+    background-color: #F4BDC9;
+}
+
 
 .d-none {
     display: none;
@@ -136,7 +176,6 @@ header {
     bottom: 0;
     width: 100%;
     height: 140px;
-    background: #f1f1f1; 
     display: flex;
     flex-direction: column;
     z-index: 1; 

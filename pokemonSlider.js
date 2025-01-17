@@ -41,7 +41,6 @@ function renderPokemonSliderTypes(currentPokemonSlider) {
     let pokemonSliderTypesRef = document.getElementById(`pokemonSliderTypes${currentPokemonSlider.id}`);
     let pokemonSliderTypes = currentPokemonSlider.types;
     pokemonSliderTypes.length < 2 ? pokemonSliderTypesRef.innerHTML += `<p>${pokemonSliderTypes[0].type.name}</p>` : pokemonSliderTypesRef.innerHTML +=  `<p>${pokemonSliderTypes[0].type.name}</p> <p>${pokemonSliderTypes[1].type.name}</p>`;
-
 }
 
 function closeOverlay() {

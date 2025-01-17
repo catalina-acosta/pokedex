@@ -4,22 +4,35 @@ let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
 let pokemonAmountToBeRendered = 0;
+let limit = 80;
+const pokemonIcons = [
+    "assets/bulbasaur_icon-icons.com_67580.png",
+    "assets/charmander_icon-icons.com_67576.png",
+    "assets/eevee_icon-icons.com_67563.png",
+    "assets/jigglypuff_icon-icons.com_67550.png",
+    "assets/meowth_icon-icons.com_67543.png",
+    "assets/pikachu_icon-icons.com_67535.png",
+    "assets/snorlax_icon-icons.com_67505.png",
+    "assets/squirtle_icon-icons.com_67504.png"
+];
 
 async function renderPokemon() {
     loading();
-    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0'); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
+    let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=0`); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
     let responseJson = await response.json();
     pokemonList = responseJson.results;
     
-    for (let index = 0; index < 1025; index++) {
+    for (let index = 0; index < limit; index++) {
         try {
             let responsePokeChar = await fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`);
             let responsePokeCharJson = await responsePokeChar.json();
-            currentPokemon = responsePokeCharJson;
-            
-            await fetchPokemonSpecies(currentPokemon.id);
-        
-            currentPokemon.color = pokemonColor;
+            currentPokemon = {
+                "id": responsePokeCharJson.id,
+                "name": responsePokeCharJson.name, 
+                "types": responsePokeCharJson.types,
+                "stats": responsePokeCharJson.stats,
+                "sprites": responsePokeCharJson.sprites
+            } 
 
             allPokemonWithAbilities.push(currentPokemon);}
         catch {
@@ -49,43 +62,22 @@ async function render40Pokemon() {
     loadMoreBtnRef.innerHTML = `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
-async function fetchPokemonSpecies(id) {
-    let responsePokeSpecies = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-    let responsePokeSpeciesJson = await responsePokeSpecies.json();
+function loading() {
+    let currentIndex = 0;
+    let contentRef = document.getElementById("content");
+    contentRef.innerHTML += loadingTemplate();
+    let imgRef = document.getElementById("loading-image");
 
-    pokemonColor = responsePokeSpeciesJson.color.name;
-    return pokemonColor;
+    updateImage(imgRef, currentIndex);
+
+    const intervalId = setInterval(() => {
+        currentIndex = updateImage(imgRef, currentIndex);
+    }, 400);
+
+    setTimeout(() => clearInterval(intervalId), 10000);
 }
 
-function loading() {
-    const pokemonIcons = [
-        "assets/bulbasaur_icon-icons.com_67580.png",
-        "assets/charmander_icon-icons.com_67576.png",
-        "assets/eevee_icon-icons.com_67563.png",
-        "assets/jigglypuff_icon-icons.com_67550.png",
-        "assets/meowth_icon-icons.com_67543.png",
-        "assets/pikachu_icon-icons.com_67535.png",
-        "assets/snorlax_icon-icons.com_67505.png",
-        "assets/squirtle_icon-icons.com_67504.png"
-    ];
-    
-    let currentIndex = 0; 
-    let contentRef = document.getElementById("content");
-    
-    contentRef.innerHTML += `
-        <div class="loading-content">
-            <img id="loading-image" src="" alt="loading icon">
-            <p>...loading...</p>
-        </div>
-    `;
-    
-    let imgRef = document.getElementById("loading-image");
-    
-    function updateImage() {
-        imgRef.src = pokemonIcons[currentIndex];
-        currentIndex = (currentIndex + 1) % pokemonIcons.length;
-    }
-    
-    updateImage(); 
-    const intervalId = setInterval(updateImage, 400);
+function updateImage(imgRef, currentIndex) {
+    imgRef.src = pokemonIcons[currentIndex]; 
+    return (currentIndex + 1) % pokemonIcons.length;
 }
