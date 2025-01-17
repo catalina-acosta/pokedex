@@ -56,13 +56,15 @@ async function render40Pokemon() {
                 
         let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
         pokemonTypes = currentPokemon.types;
-        pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
+        pokemonTypesRef.innerHTML += createPokemonTypesTemplate(pokemonTypes)
     }
 
     loadMoreBtnRef.innerHTML = `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
-
+function createPokemonTypesTemplate(pokemonTypes) {
+    return pokemonTypes.map(type => `<p>${type.type.name}</p>`).join('');
+}
 
 
 

@@ -4,6 +4,7 @@ function resetpokemonAmountToBeRendered(){
 }
 
 function searchPokemon(){
+
     let inputRef = document.getElementById("input").value;
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
@@ -17,7 +18,7 @@ function searchPokemon(){
                 contentRef.innerHTML += pokemonCardTemplate(pokemon);
                 let pokemonTypesRef = document.getElementById(`pokemonTypes${pokemon.id}`);
                 pokemonTypes = pokemon.types;
-                pokemonTypes.length < 2 ? pokemonTypesRef.innerHTML += `<p>${pokemonTypes[0].type.name}</p>` : pokemonTypesRef.innerHTML +=  `<p>${pokemonTypes[0].type.name}</p> <p>${pokemonTypes[1].type.name}</p>`;
+                pokemonTypesRef.innerHTML += createPokemonTypesTemplate(pokemonTypes);
             }
         })
     } else {
