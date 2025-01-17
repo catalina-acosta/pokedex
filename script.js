@@ -62,6 +62,10 @@ async function render40Pokemon() {
     loadMoreBtnRef.innerHTML = `<button onclick="render40Pokemon()">load next 40 pokemon</button>`
 }
 
+
+
+
+
 function loading() {
     let currentIndex = 0;
     let contentRef = document.getElementById("content");

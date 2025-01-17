@@ -1,6 +1,6 @@
 function pokemonCardTemplate(currentPokemon) {
     return `
-    <div id="card${currentPokemon.id}" class="card " onclick="openOverlay('${currentPokemon.id}', '${currentPokemon.color}')">
+    <div id="card${currentPokemon.id}" class="card " onclick="openOverlay('${currentPokemon.id}')">
                 <div class="img-container">
                     <img src="${currentPokemon.sprites.other['official-artwork'].front_default}" alt="${currentPokemon.name}">
                 </div>
@@ -24,7 +24,7 @@ function cardSliderTemplate(zoomedPokeCard) {
                     <h2>${zoomedPokeCard.name}</h2>
                     <p>#${zoomedPokeCard.id}</p>
                 </div>
-                <div class="img-container ${zoomedPokeCard.types[0].type.name}">
+                <div class="img-container" id="${zoomedPokeCard.types[0].type.name}">
                     <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
             </div>
@@ -38,7 +38,7 @@ function cardSliderTemplate(zoomedPokeCard) {
                         </div>
                     </div>
                 `).join('')}
-                <div id="pokemonSliderTypes${zoomedPokeCard.id}" class="card-slider-types ${zoomedPokeCard.color}"></div>
+                <div id="pokemonSliderTypes${zoomedPokeCard.id}" class="card-slider-types ${zoomedPokeCard.types[0].type.name}"></div>
             </div>
         </div>
         <div class="slider_navigation">

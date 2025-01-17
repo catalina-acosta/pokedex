@@ -49,6 +49,7 @@
     height: 240px;
     position: relative;
     margin: 0 auto;
+    background: transparent;
 }
 
 .card-slider .card-info {
