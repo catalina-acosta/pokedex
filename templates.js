@@ -17,7 +17,8 @@ function pokemonCardTemplate(currentPokemon) {
 
 function cardSliderTemplate(zoomedPokeCard) {
     return `
-        <div id="cardSlider${zoomedPokeCard.id}" class="card-slider" onclick="closeOverlay()">
+        <div class="close-btn-container"><button onclick="closeOverlay()"><i class="fa-solid fa-xmark"></i></button></div>
+        <div id="cardSlider${zoomedPokeCard.id}" class="card-slider">
             <div class="top-card-container">
                 <div class="title-container">
                     <h2>${zoomedPokeCard.name}</h2>

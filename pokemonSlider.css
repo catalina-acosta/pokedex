@@ -2,6 +2,12 @@
     z-index: 21;
 }
 
+.close-btn-container {
+    position: absolute;
+    top: 80px;
+    right: 260px;
+}
+
 .card-slider {
     width: 300px;
     height: 600px;

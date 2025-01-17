@@ -4,9 +4,6 @@ function resetpokemonAmountToBeRendered(){
 }
 
 function searchPokemon(){
-    limit = 200;
-    renderPokemon();
-
     let inputRef = document.getElementById("input").value;
     let contentRef = document.getElementById("content");
     contentRef.innerHTML = "";
