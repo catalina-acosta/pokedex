@@ -12,10 +12,37 @@ function searchPokemon(){
     loadMoreBtnRef.innerHTML = "";
 
     if (inputRef.length > 2) {
-        displayFilteredPokemon(inputRef, contentRef, loadMoreBtnRef);
+        renderSearchedPokemon(inputRef, contentRef, loadMoreBtnRef);
     } else {
         contentRef.innerHTML += `<p>please enter more that 2 letters</p>`
     }
+    loadMoreBtnRef.innerHTML += `<button class="see-all-btn" onclick="resetpokemonAmountToBeRendered(), render40Pokemon() ">see all pokemon</button>`
+}
+
+async function renderSearchedPokemon(inputRef, contentRef) {
+    const searchPokeList = pokemonList.filter((pokemon) => pokemon.name.includes(inputRef));
+    searchPokeList.forEach(async (pokemon) => {
+        const currentPokemon = await fetchSearchedPokemon(pokemon.url)
+        console.log(currentPokemon);
+        contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
+            let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
+            pokemonTypes = pokemon.types;
+            pokemonTypesRef.innerHTML += createPokemonTypesTemplate(currentPokemon.types);
+    });
+}
+
+async function fetchSearchedPokemon(url) {
+    const response = await fetch(url);
+    const responseJson = await response.json();
+    let currentPokemon = {
+        id: responseJson.id,
+        name: responseJson.name,
+        types: responseJson.types,
+        stats: responseJson.stats,
+        sprites: responseJson.sprites,
+    };
+    console.log(currentPokemon);
+    return currentPokemon;
 }
 
 function displayFilteredPokemon(inputRef, contentRef, loadMoreBtnRef) {

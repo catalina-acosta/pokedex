@@ -17,13 +17,16 @@ function pokemonCardTemplate(currentPokemon) {
 
 function cardSliderTemplate(zoomedPokeCard) {
     return `
-        <div class="close-btn-container"><button onclick="closeOverlay()"><i class="fa-solid fa-xmark"></i></button></div>
         <div id="cardSlider${zoomedPokeCard.id}" class="card-slider">
             <div class="top-card-container">
                 <div class="title-container">
-                    <h2>${zoomedPokeCard.name}</h2>
-                    <p>#${zoomedPokeCard.id}</p>
+                    <div class="card-slider-title-id">
+                        <h2>${zoomedPokeCard.name}</h2>
+                        <p>#${zoomedPokeCard.id}</p>
+                    </div>
+                    <button id="btnCloseOverlay" class="${zoomedPokeCard.types[0].type.name}" onclick="closeOverlay()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
+                
                 <div class="img-container" id="${zoomedPokeCard.types[0].type.name}">
                     <img src="${zoomedPokeCard.sprites.other['official-artwork'].front_default}" alt="${zoomedPokeCard.name}">
                 </div>
