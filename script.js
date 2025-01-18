@@ -4,7 +4,7 @@ let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
 let pokemonAmountToBeRendered = 0;
-let limit = 200;
+let limit = 150;
 let offset = 0;
 let renderedPokemon = [];
 
@@ -28,8 +28,8 @@ async function renderPokemon() {
 
 async function fetchPokemonData() {
     try {
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`); // limit = 40 as variable eigeben + offset. button load more changes those variables and use same functions
-        let responseJson = await response.json();
+        let response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`); 
+        responseJson = await response.json();
         pokemonList = responseJson.results;
     } catch(error) {
         console.error("Failed to fetch the Pokémon list:", error);
@@ -72,8 +72,6 @@ async function render40Pokemon() {
         pokemonTypes = currentPokemon.types;
         let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
         pokemonTypesRef.innerHTML += createPokemonTypesTemplate(pokemonTypes);
-        console.log(currentPokemon);
-        console.log("pokemonAmountToBeRendered:", pokemonAmountToBeRendered);
     }
     loadMoreBtnRef.innerHTML = `<button onclick="pokemonIncrement()">load next 40 pokemon</button>`
 }

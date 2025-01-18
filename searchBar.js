@@ -23,7 +23,6 @@ async function renderSearchedPokemon(inputRef, contentRef) {
     const searchPokeList = pokemonList.filter((pokemon) => pokemon.name.includes(inputRef));
     searchPokeList.forEach(async (pokemon) => {
         const currentPokemon = await fetchSearchedPokemon(pokemon.url)
-        console.log(currentPokemon);
         contentRef.innerHTML += pokemonCardTemplate(currentPokemon);
             let pokemonTypesRef = document.getElementById(`pokemonTypes${currentPokemon.id}`);
             pokemonTypes = pokemon.types;
@@ -41,7 +40,6 @@ async function fetchSearchedPokemon(url) {
         stats: responseJson.stats,
         sprites: responseJson.sprites,
     };
-    console.log(currentPokemon);
     return currentPokemon;
 }
 

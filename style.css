@@ -141,10 +141,10 @@ header {
     width: 160px;
     height: 240px;
     position: relative;
-    background: white; /* Card background color */
-    border-radius: 10px; /* Rounded corners for the card */
-    overflow: hidden; /* Ensures elements don't overflow the card boundaries */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .card:hover {
@@ -164,7 +164,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* overflow: hidden;  */
 }
 
 .img-container img {
@@ -238,3 +237,9 @@ button:hover {
     cursor: pointer;
 }
 
+@media(max-width: 480px) {
+    header {
+        flex-direction: column;
+        margin: 24px 0;
+    }
+}
