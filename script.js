@@ -4,7 +4,7 @@ let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
 let pokemonAmountToBeRendered = 0;
-let limit = 150;
+let limit = 80;
 let offset = 0;
 let renderedPokemon = [];
 
