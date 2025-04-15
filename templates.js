@@ -54,9 +54,11 @@ function cardSliderTemplate(zoomedPokeCard) {
 
 function loadingTemplate() {
     return `
+    <div id="overlayLoading">
         <div class="loading-content">
             <img id="loading-image" src="" alt="loading icon">
             <p>...loading...</p>
         </div>
+    </div>
     `
 }

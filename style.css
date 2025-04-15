@@ -116,8 +116,17 @@ header {
     margin: 0 12px;   
 }
 
-.loading-content {
-    margin-top: 240px;
+#overlayLoading{
+    width: 100%;
+    background-color: #ffffffd4;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .loading-content img {

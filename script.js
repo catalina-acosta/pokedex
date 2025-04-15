@@ -4,7 +4,7 @@ let allPokemonWithAbilities = [];
 let pokemonTypes;
 let pokemonColor;
 let pokemonAmountToBeRendered = 0;
-let limit = 80;
+let limit = 40;
 let offset = 0;
 let renderedPokemon = [];
 
@@ -90,7 +90,7 @@ function loading() {
 
     const intervalId = setInterval(() => {
         currentIndex = updateImage(imgRef, currentIndex);
-    }, 400);
+    }, 200);
 
     setTimeout(() => clearInterval(intervalId), 10000);
 }
